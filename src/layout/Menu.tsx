@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useMemo } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { UploadOutlined, UserOutlined, VideoCameraOutlined, MailOutlined } from '@ant-design/icons'
 import { Menu } from 'antd'
@@ -7,8 +7,12 @@ import { setMenuDefaultKey } from '@/store/modules/setting'
 
 function MenuWithRoute() {
     const location = useLocation();
-    const { menuDefaultKey } = useSelector((state: any) => state.setting)
+    const { menuDefaultKey, styleSetting } = useSelector((state: any) => state.setting)
     const dispatch = useDispatch()
+    const {layoutStyle} = styleSetting
+    const currentMode = useMemo(() => {
+        return layoutStyle === 'withSide' ? 'inline' : 'horizontal'
+    },[layoutStyle])
 
     const items = [
         {
@@ -50,7 +54,7 @@ function MenuWithRoute() {
     return (
         <Menu
             theme="dark"
-            mode="inline"
+            mode={currentMode}
             selectedKeys={[menuDefaultKey]}
             items={items}
             onClick={onClick}

@@ -56,7 +56,7 @@ function Setting() {
     const resetHandle = () => {
         dispatch(resetstyleSetting());
     }
-    const saveHandle = () => { }
+    const exportHandle = () => { }
 
     return (
         <>
@@ -68,7 +68,7 @@ function Setting() {
                 footer={(
                     <div className='flex justify-center'>
                         <Button type="primary" danger className="mr-[20px]" onClick={resetHandle}>重置</Button>
-                        <Button type="primary" onClick={saveHandle}>保存</Button>
+                        <Button type="primary" onClick={exportHandle}>导出</Button>
                     </div>
                 )}
 

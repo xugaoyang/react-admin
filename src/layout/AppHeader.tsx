@@ -19,7 +19,11 @@ import {
 import { useTranslation } from 'react-i18next';
 import type { Language } from '@/i18n/antd-locale';
 import { updateDayjsLocale } from '@/i18n/dayjs-locale';
+import MenuWithRoute from './Menu'
+import reactLogo from '@/assets/react.svg'
+
 const { Header } = Layout;
+
 
 function AppHeader() {
   const { i18n } = useTranslation();
@@ -72,19 +76,27 @@ function AppHeader() {
   return (
     <Header
       style={{ padding: 0, background: styleSetting.headerColor }}
-      className="flex justify-between"
+      className={`flex ${styleSetting.layoutStyle !== 'withoutSide'?'justify-between':''}`}
     >
-      <Button
-        type="text"
-        icon={isCollapse ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
-        onClick={() => dispatch(setIsCollapse(!isCollapse))}
-        style={{
-          fontSize: '16px',
-          width: 64,
-          height: 64,
-        }}
-      />
-      <Space className="text-[16px]">
+      {styleSetting.layoutStyle === 'withoutSide' &&
+        (<div className="w-[200px] h-[64px] flex shrink-0 justify-center items-center">
+          <img src={reactLogo} alt="" />
+        </div>)}
+      {styleSetting.layoutStyle === 'withoutSide' && (<div className="flex-1"><MenuWithRoute /></div>)}
+      {styleSetting.layoutStyle !== 'withoutSide' && (
+        <Button
+          type="text"
+          icon={isCollapse ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
+          onClick={() => dispatch(setIsCollapse(!isCollapse))}
+          style={{
+            fontSize: '16px',
+            width: 64,
+            height: 64,
+          }}
+        />
+      )}
+
+      <Space className="text-[16px] shrink-0">
         <i className="i-mdi-settings-outline icon-24 cursor-pointer" onClick={() => dispatch(setIsSettingOpen(true))}></i>
         <Dropdown
           menu={{

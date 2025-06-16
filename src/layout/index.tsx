@@ -1,5 +1,5 @@
 import { Outlet } from 'react-router-dom'
-import { Layout,  theme } from 'antd'
+import { Layout, theme, Breadcrumb } from 'antd'
 import reactLogo from '@/assets/react.svg'
 import AppHeader from './AppHeader'
 import MenuWithRoute from './Menu'
@@ -10,31 +10,41 @@ import Setting from './Setting'
 const { Sider, Content } = Layout
 
 function AppLayout() {
-  const { isCollapse } = useSelector((state:any) => state.setting)
+  const { isCollapse, styleSetting } = useSelector((state: any) => state.setting)
   const {
     token: { borderRadiusLG, colorBgContainer },
   } = theme.useToken()
 
   return (
     <Layout className="w-full h-full">
-      <Sider trigger={null} collapsible collapsed={isCollapse}>
-        <div className="h-[64px] flex justify-center items-center">
-          <img src={reactLogo} alt="" />
-        </div>
-        <MenuWithRoute />
-      </Sider>
+      {styleSetting.layoutStyle === 'withoutSide' ? <AppHeader /> : (
+        <Sider trigger={null} collapsible collapsed={isCollapse}>
+          <div className="h-[64px] flex justify-center items-center">
+            <img src={reactLogo} alt="" />
+          </div>
+          <MenuWithRoute />
+        </Sider>)}
       <Layout>
-        <AppHeader />
+        {styleSetting.layoutStyle !== 'withoutSide' && <AppHeader />}
         <Content
           style={{
-            margin: '24px 16px',
-            padding: 24,
-            minHeight: 280,
-            background: colorBgContainer,
-            borderRadius: borderRadiusLG,
+            margin: '16px',
           }}
         >
-          <Outlet />
+          <Breadcrumb
+            style={{ margin: '16px 0' }}
+            items={[{ title: 'Home' }, { title: 'List' }, { title: 'App' }]}
+          />
+          <div
+            style={{
+              background: colorBgContainer,
+              minHeight: 280,
+              padding: 24,
+              borderRadius: borderRadiusLG,
+            }}
+          >
+            <Outlet />
+          </div>
         </Content>
       </Layout>
       <Setting></Setting>
