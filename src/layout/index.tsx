@@ -1,10 +1,11 @@
 import { Outlet } from 'react-router-dom';
-import { Layout, theme, Breadcrumb } from 'antd';
+import { Layout, theme } from 'antd';
 import logo from '@/assets/logo.png';
 import AppHeader from './AppHeader';
 import MenuWithRoute from './Menu';
 import { useSelector } from 'react-redux';
 import Setting from './Setting';
+import CustomBreadcrumb from './CustomBreadcrumb';
 
 const { Sider, Content } = Layout;
 
@@ -47,10 +48,7 @@ function AppLayout() {
             margin: '16px',
           }}
         >
-          <Breadcrumb
-            style={{ margin: '16px 0' }}
-            items={[{ title: 'Home' }, { title: 'List' }, { title: 'App' }]}
-          />
+          <CustomBreadcrumb />
           <div
             style={{
               background: colorBgContainer,
