@@ -76,7 +76,7 @@ function AppHeader() {
   return (
     <Header
       style={{ padding: 0, background: styleSetting.headerColor }}
-      className={`flex ${styleSetting.layoutStyle !== 'withoutSide'?'justify-between':''}`}
+      className={`flex sticky left-0 top-0 ${styleSetting.layoutStyle !== 'withoutSide'?'justify-between':''}`}
     >
       {styleSetting.layoutStyle === 'withoutSide' &&
         (<div className="w-[200px] h-[64px] flex shrink-0 justify-center items-center">

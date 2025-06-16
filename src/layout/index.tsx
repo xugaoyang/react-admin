@@ -1,29 +1,41 @@
-import { Outlet } from 'react-router-dom'
-import { Layout, theme, Breadcrumb } from 'antd'
-import reactLogo from '@/assets/react.svg'
-import AppHeader from './AppHeader'
-import MenuWithRoute from './Menu'
-import { useSelector } from 'react-redux'
-import Setting from './Setting'
+import { Outlet } from 'react-router-dom';
+import { Layout, theme, Breadcrumb } from 'antd';
+import reactLogo from '@/assets/react.svg';
+import AppHeader from './AppHeader';
+import MenuWithRoute from './Menu';
+import { useSelector } from 'react-redux';
+import Setting from './Setting';
 
-
-const { Sider, Content } = Layout
+const { Sider, Content } = Layout;
 
 function AppLayout() {
-  const { isCollapse, styleSetting } = useSelector((state: any) => state.setting)
+  const { isCollapse, styleSetting } = useSelector(
+    (state: any) => state.setting,
+  );
   const {
     token: { borderRadiusLG, colorBgContainer },
-  } = theme.useToken()
+  } = theme.useToken();
 
   return (
-    <Layout className="w-full h-full">
-      {styleSetting.layoutStyle === 'withoutSide' ? <AppHeader /> : (
-        <Sider trigger={null} collapsible collapsed={isCollapse}>
+    <Layout className="w-full h-full" style={{
+      overflowY: 'auto'
+    }}>
+      {styleSetting.layoutStyle === 'withoutSide' ? (
+        <AppHeader />
+      ) : (
+        <Sider
+          trigger={null}
+          collapsible
+          collapsed={isCollapse}
+          className="sticky left-0 top-0"
+          style={{ background: styleSetting.sideColor }}
+        >
           <div className="h-[64px] flex justify-center items-center">
             <img src={reactLogo} alt="" />
           </div>
           <MenuWithRoute />
-        </Sider>)}
+        </Sider>
+      )}
       <Layout>
         {styleSetting.layoutStyle !== 'withoutSide' && <AppHeader />}
         <Content
@@ -49,7 +61,7 @@ function AppLayout() {
       </Layout>
       <Setting></Setting>
     </Layout>
-  )
+  );
 }
 
-export default AppLayout
+export default AppLayout;

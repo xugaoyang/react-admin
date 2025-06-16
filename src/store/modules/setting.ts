@@ -9,7 +9,7 @@ const initialState = {
   isSettingOpen: false,
   styleSetting: {
     themeColor: '#1677ff',
-    sideColor: '#1677ff',
+    sideColor: '#ffffff',
     headerColor: '#ffffff',
     layoutStyle: 'withSide'
   } as styleSettingType
