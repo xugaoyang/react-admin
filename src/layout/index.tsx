@@ -1,6 +1,6 @@
 import { Outlet } from 'react-router-dom';
 import { Layout, theme, Breadcrumb } from 'antd';
-import reactLogo from '@/assets/react.svg';
+import logo from '@/assets/logo.png';
 import AppHeader from './AppHeader';
 import MenuWithRoute from './Menu';
 import { useSelector } from 'react-redux';
@@ -17,9 +17,12 @@ function AppLayout() {
   } = theme.useToken();
 
   return (
-    <Layout className="w-full h-full" style={{
-      overflowY: 'auto'
-    }}>
+    <Layout
+      className="w-full h-full"
+      style={{
+        overflowY: 'auto',
+      }}
+    >
       {styleSetting.layoutStyle === 'withoutSide' ? (
         <AppHeader />
       ) : (
@@ -31,7 +34,8 @@ function AppLayout() {
           style={{ background: styleSetting.sideColor }}
         >
           <div className="h-[64px] flex justify-center items-center">
-            <img src={reactLogo} alt="" />
+            <img className="w-[50px]" src={logo} alt="" />
+            {!isCollapse && <span className="font-bold">admin system</span>}
           </div>
           <MenuWithRoute />
         </Sider>

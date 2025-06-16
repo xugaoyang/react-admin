@@ -19,11 +19,10 @@ import {
 import { useTranslation } from 'react-i18next';
 import type { Language } from '@/i18n/antd-locale';
 import { updateDayjsLocale } from '@/i18n/dayjs-locale';
-import MenuWithRoute from './Menu'
-import reactLogo from '@/assets/react.svg'
+import MenuWithRoute from './Menu';
+import logo from '@/assets/logo.png';
 
 const { Header } = Layout;
-
 
 function AppHeader() {
   const { i18n } = useTranslation();
@@ -68,7 +67,6 @@ function AppHeader() {
     },
   ];
   const langOnClick: MenuProps['onClick'] = ({ key }) => {
-
     dispatch(setDefaultLang(key));
     i18n.changeLanguage(key);
     updateDayjsLocale(key as Language);
@@ -76,13 +74,19 @@ function AppHeader() {
   return (
     <Header
       style={{ padding: 0, background: styleSetting.headerColor }}
-      className={`flex sticky left-0 top-0 ${styleSetting.layoutStyle !== 'withoutSide'?'justify-between':''}`}
+      className={`flex sticky left-0 top-0 ${styleSetting.layoutStyle !== 'withoutSide' ? 'justify-between' : ''}`}
     >
-      {styleSetting.layoutStyle === 'withoutSide' &&
-        (<div className="w-[200px] h-[64px] flex shrink-0 justify-center items-center">
-          <img src={reactLogo} alt="" />
-        </div>)}
-      {styleSetting.layoutStyle === 'withoutSide' && (<div className="flex-1"><MenuWithRoute /></div>)}
+      {styleSetting.layoutStyle === 'withoutSide' && (
+        <div className="w-[200px] h-[64px] flex shrink-0 justify-center items-center">
+          <img className="w-[50px]" src={logo} alt="" />
+          <span className="font-bold">admin system</span>
+        </div>
+      )}
+      {styleSetting.layoutStyle === 'withoutSide' && (
+        <div className="flex-1">
+          <MenuWithRoute />
+        </div>
+      )}
       {styleSetting.layoutStyle !== 'withoutSide' && (
         <Button
           type="text"
@@ -97,7 +101,10 @@ function AppHeader() {
       )}
 
       <Space className="text-[16px] shrink-0">
-        <i className="i-mdi-settings-outline icon-24 cursor-pointer" onClick={() => dispatch(setIsSettingOpen(true))}></i>
+        <i
+          className="i-mdi-settings-outline icon-24 cursor-pointer"
+          onClick={() => dispatch(setIsSettingOpen(true))}
+        ></i>
         <Dropdown
           menu={{
             items: themeItems,
