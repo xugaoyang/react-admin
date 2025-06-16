@@ -8,7 +8,7 @@ const initialState = {
   defaultTheme: 'light',
   isSettingOpen: false,
   styleSetting: {
-    themeColor: '#1677ff',
+    themeColor: '#bb00ff',
     sideColor: '#ffffff',
     headerColor: '#ffffff',
     layoutStyle: 'withSide'
