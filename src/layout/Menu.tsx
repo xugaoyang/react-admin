@@ -9,6 +9,7 @@ import {
 import { Menu } from 'antd';
 import { useSelector, useDispatch } from 'react-redux';
 import { setMenuDefaultKey } from '@/store/modules/setting';
+import {routeList} from '@/router'
 
 function MenuWithRoute() {
   const location = useLocation();
@@ -20,6 +21,8 @@ function MenuWithRoute() {
   const currentMode = useMemo(() => {
     return layoutStyle === 'withSide' ? 'inline' : 'horizontal';
   }, [layoutStyle]);
+
+  // TODO:优化菜单，从route获取生成;
 
   const items = [
     {
@@ -47,7 +50,36 @@ function MenuWithRoute() {
       label: <Link to="/bill">mobile-demo</Link>,
       icon: <MailOutlined />,
     },
+    {
+      key: '/parent',
+      label: 'parent',
+      icon: <MailOutlined />,
+      children: [
+        {
+          key: '/parent/firstChild',
+          label: <Link to="parent/firstChild">firstChild</Link>,
+          icon: <MailOutlined />,
+        },
+        {
+          key: '/parent/secondChild',
+          label: 'secondChild',
+          icon: <MailOutlined />,
+          children: [
+            {
+              key: '/parent/secondChild/secondChildSon',
+              label: <Link to="/parent/secondChild/secondChildSon">secondChildSon</Link>,
+              icon: <MailOutlined />,
+            }
+          ]
+        }
+      ]
+    },
+
   ];
+
+  // TODO:1.找展示在菜单中的路由;2.组合成menu对应的类型数据
+
+
   useEffect(() => {
     const currentPath = location.pathname;
     dispatch(setMenuDefaultKey(currentPath));
